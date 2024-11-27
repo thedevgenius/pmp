@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Add User | {% endblock title %}
+
+{% block content %}
+    <style>
+        .errorlist{
+            list-style: none;
+            color: #fd5812;
+            padding-left: 0;
+        }
+    </style>
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card bg-white border-0 rounded-3 mb-4">
+                <div class="card-body p-4">
+                    <h4 class="fs-18 mb-4">Textual Inputs</h4>
+                    <form method="post" novalidate="true">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group mb-4">
+                                    <label class="label text-secondary text-capitalize" id="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                                    <div class="form-group position-relative">
+                                        {{ form.first_name }}
+                                        <i class="ri-user-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
+                                    </div>
+                                    {{ form.first_name.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-4">
+                                    <label class="label text-secondary text-capitalize" id="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                                    <div class="form-group position-relative">
+                                        {{ form.last_name }}
+                                        <i class="ri-user-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
+                                    </div>
+                                    {{ form.last_name.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-4">
+                                    <label class="label text-secondary text-capitalize" id="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                                    <div class="form-group position-relative">
+                                        {{ form.email }}
+                                        <i class="ri-user-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
+                                    </div>
+                                    {{ form.email.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-4">
+                                    <label class="label text-secondary text-capitalize" id="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                                    <div class="form-group position-relative">
+                                        {{ form.password }}
+                                        <i class="ri-user-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
+                                    </div>
+                                    {{ form.password.errors }}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary fw-semibold text-white py-2 px-3" type="submit">Add User</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
