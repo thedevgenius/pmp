@@ -58,8 +58,12 @@
                             <span class="material-symbols-outlined menu-icon">dashboard</span>
                             <span class="title">Dashboard</span>
                         </a>
-                
-                        
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'add_member' %}" class="menu-link active">
+                            <span class="material-symbols-outlined menu-icon">dashboard</span>
+                            <span class="title">Add User</span>
+                        </a>
                     </li>
 
                    
@@ -340,8 +344,9 @@
                                                 <div class="flex-grow-1 ms-2">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-none d-xxl-block">
-                                                            <div class="d-flex align-content-center">
-                                                                <h3>Olivia</h3>
+                                                            <div class="align-content-center">
+                                                                <h3>{{ request.user.get_full_name }}</h3>
+                                                                <span>{{ request.user.role }}</span>
                                                             </div>
                                                         </div>
                                                     </div>

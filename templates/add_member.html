@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="card bg-white border-0 rounded-3 mb-4">
                 <div class="card-body p-4">
-                    <h4 class="fs-18 mb-4">Textual Inputs</h4>
+                    <h4 class="fs-18 mb-4">Add New Member</h4>
                     <form method="post" novalidate="true">
                         {% csrf_token %}
                         <div class="row">
@@ -42,7 +42,7 @@
                                     <label class="label text-secondary text-capitalize" id="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                                     <div class="form-group position-relative">
                                         {{ form.email }}
-                                        <i class="ri-user-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
+                                        <i class="ri-mail-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
                                     </div>
                                     {{ form.email.errors }}
                                 </div>
@@ -52,11 +52,31 @@
                                     <label class="label text-secondary text-capitalize" id="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
                                     <div class="form-group position-relative">
                                         {{ form.password }}
-                                        <i class="ri-user-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
+                                        <i class="ri-key-line position-absolute top-50 start-0 translate-middle-y fs-20 ps-20"></i>
                                     </div>
                                     {{ form.password.errors }}
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-4">
+                                    <label class="label text-secondary text-capitalize" id="{{ form.deg.id_for_label }}">{{ form.deg.label }}</label>
+                                    <div class="form-group position-relative">
+                                        {{ form.deg }}
+                                    </div>
+                                    {{ form.deg.errors }}
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-12">
+                                <div class="form-group mb-4">
+                                    <label class="label text-secondary text-capitalize" id="designation">Designation</label>
+                                    <select class="form-select form-control h-55" aria-label="Default select example" required>
+                                        <option selected="">Select</option>
+                                        {% for deg in designations %}
+                                            <option value="{{ deg }}">{{ deg }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div> -->
                         </div>
                         <button class="btn btn-primary fw-semibold text-white py-2 px-3" type="submit">Add User</button>
                     </form>

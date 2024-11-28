@@ -5,9 +5,13 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
+    ROLE_CHOICE = (
+        ('LD', 'Leader'),
+        ('MB', 'Member')
+    )
     username = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(unique=True)
-    org = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'is_staff': True})
+    role = models.CharField(max_length=3, default='MB', choices=ROLE_CHOICE)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -20,19 +24,32 @@ class User(AbstractUser):
             self.set_password(self.password)
         return super().save(*args, **kwargs)
 
-class Company(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+class Team(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, limit_choices_to={'role' : 'LD'}, related_name='team')
     name = models.CharField(max_length=300)
 
     def __str__(self):
         return self.name
     
 
-class Team(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    lead = models.ForeignKey(User, on_delete=models.CASCADE, related_name='team_lead')
-    members = models.ManyToManyField(User, related_name='team_members')
+class Designation(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.company} - {self.lead}'
+        return self.title
+
+class TeamMember(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role' : 'MB'})
+    deg = models.ForeignKey(Designation, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        unique_together = ('team', 'member',)
     
+    def __str__(self):
+        return f'{self.team} - {self.member.first_name} {self.member.last_name}'
+    
+
+
